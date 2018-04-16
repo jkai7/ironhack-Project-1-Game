@@ -20,18 +20,25 @@ time, mark, audio, video {
 } 
 
 body {
-    font-family: 'Rubik', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 .container-fluid {
-  background: url("/images/Book copy.jpg");
+    padding-left: 0px;
+}
+
+.gradient-overlay {
+  background:linear-gradient(
+    RGBA(60, 179, 113, .2),
+    RGBA(127, 255, 212, 0)
+   ), url("/images/Book copy.jpg");
   width:1440px;
   height:900px;
   background-size:cover; 
   background-position:center center; 
   background-repeat:no-repeat; 
+  
 }
-
 
 .flex-container {
     display: flex;
@@ -39,15 +46,55 @@ body {
     align-items: center;
 }
 
+.flex-2{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100px;    
+    margin-left: 110px;
+    margin-top: 10px;
+}
+
+.flex-3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.flex-3 p {
+    font-size: 25px;
+}
+
+.title-bg {
+    height: 120px;
+    width: 1440px;
+    background: #222222;
+    /* box-shadow: 1px 1px 30px 1px RGBA(127, 255, 212, .5); */
+    color: #fff;
+    font-size: 40px;
+    border-radius: .3rem;
+    border-bottom: 5px solid darkgray;
+}
+
+h1 {
+    text-shadow: 1px 3px 7px RGB(127, 255, 212);
+}
+
+h2 {
+font-size: 30px;
+}
+
 canvas {
     background: #eee;
-    border: 5px solid #222222;
-    margin-top: 100px;
     margin-bottom: 70px;
+    margin-top: 80px;
+    border: 5px solid #222222;
 }
 
 .btn {
     margin-bottom: 70px;
+    box-shadow: 1px 1px 5px 3px RGB(60, 179, 113);
 }
 .btn:hover {
     background-color: #7FFFD4;
