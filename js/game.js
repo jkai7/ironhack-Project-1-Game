@@ -4,14 +4,16 @@ var ctx = canvas.getContext("2d");
 
 
 window.onload = function() {
-    reset();
-    document.getElementById("start-btn").onclick = function (){
+    reset(); //restsrt button reloads page
+    document.getElementById("start-btn").onclick = function (){ //start btn starts game
     startGame();
 }
 
 function startGame(){ 
-    blockStart();
-    setInterval(draw,100);    
+    blockStart(); //allows user to only press start once
+    setInterval(draw, 10); 
+    reDraw(); // redraws letters
+       
 };
 
 function reset(){ //resets game board
@@ -25,9 +27,11 @@ function blockStart(){ //prevents player from hiiting start after game initializ
     btnElement.classList.add("blocked");
 }
 
+/* image of book */
 var bookImg = new Image();  // book image
 bookImg.src = "/images/openBookIllustrator.svg"
 
+/* defines book */
 var bookHeight = 180;
 var bookWidth = 200;
 var bookX = (canvas.width-bookWidth) / 1.73; //centering the book image on canvas
@@ -39,18 +43,6 @@ var leftGo = false;
 var upGo = false;
 var downGo = false;
 
-/* wrong letters to catch */
-// function letters(){
-// this.letterObstacles = [];
-// this.directionX = x;
-// this.directionY = y;
-// this.speedX = 0;
-// this.speedY = 0;
-//   ctx.font = '60px Poppins';
-//   ctx.fillStyle = '#7FFFD4';
-//   ctx.fillText  ('K', 280, 150);
-
-// }
 
 /* moving the book if key is pressed */
 function isPressed(yes){    
@@ -79,32 +71,82 @@ function notPressed(no){
         downGo = false;
     }
 }
-var letterX = getRandom(canvas.width); // letter positioning on x axis
-var letterY = canvas.height - 400;// starting point of decent
-var directionX = 0;
-var directionY = 2;
 
-function letterFall(){
-    ctx.font = '60px Poppins';
-    ctx.fillStyle = '#7FFFD4';
-    console.log("test:", test.letters);
+//===============================================
+//var letterX = getRandom(canvas.width - 20) + 10; // letter positioning on x axis
+//var letterY = canvas.height - 450;// starting point of decent
+// var directionX = 0;
+// var directionY = 1;
 
-    for(var i = 0; i < test.letters.length; i++){
+// function letterFall(){
+//     ctx.font = '60px Poppins';
+//     ctx.fillStyle = '#7FFFD4';
+//     ctx.fillText  (oneRandomLetter, letterX, letterY);//fill the text with a random letter 
+//     letterX += directionX;
+//     letterY += directionY;
+//   };
+//================================================
 
-        ctx.fillText  (test.letters[0], letterX, letterY);//fill the text with a random letter 
+var spawnLineY = canvas.height - 450; // newly spawned objects start at 50 px on top of y -450
+
+var spawnRate = 1500; // spawn a new object every 1500ms
+
+var spawnRateOfDescent = 2; // how fast objects will fall
+
+var lastSpawn = -1; // when was the last object spawned
+
+var spawnedObjects = []; // this array holds all spawned object
+
+var startTime = Date.now(); // save the starting time (used to calc elapsed time)
+
+function spawnRandomLetter() {
+
+//var letter;   // select a random type for this new object
+
+var spawnedLetter = {
+
+  letterX: getRandom(canvas.width - 20) + 10,   // set x randomly but at least 15px off the canvas edges
+
+  letterY: spawnLineY, // set y to start on the line where spawnedObjects are spawned
+}
+
+spawnedObjects.push(spawnedLetter); // add the new object to the spawnedObjects[] array
+
+}
+
+function reDraw() {
+
+    var time = Date.now(); // get the elapsed time
+    
+    // setTimeout(function() {
+        
+    //     var millis = Date.now() - time;
+
+    //   }, 1000);
+  
+    /* see if its time to spawn a new object */
+    if (time > (lastSpawn + spawnRate)) {
+        lastSpawn = time;
+        spawnRandomLetter();
+        
     }
+    requestAnimationFrame(reDraw);  // request another animation frame
+    
+    
+    /* move each object down the canvas */
+    for (var i = 0; i < spawnedObjects.length; i++) {
+        var letter = spawnedObjects[i];
+        letter.letterY += spawnRateOfDescent;
+        ctx.font = '60px Poppins';
+        ctx.fillStyle = '#7FFFD4';
+        ctx.fillText  (oneRandomLetter, letter.letterX, letter.letterY);
+    }
+    
+   
+  }
 
-    letterX += directionX;
-    letterY += directionY;
-  };
-
-  var test;
-/* draw items on canvas */
 function draw() {
-    console.log("redraw")
-    test = new Letter();
 
-test.pickRandomLetter();
     ctx.clearRect(0, 0, canvas.width, canvas.height); //clears previous iterations drawn on canvas
     ctx.drawImage(bookImg, bookX, bookY, bookWidth, bookHeight); //drawing the book onto the canvas
 
@@ -118,84 +160,12 @@ test.pickRandomLetter();
         bookY -=3; //move 3 pixels up everytime frame is drawn
     }
 
-  
-    
-
-  
-  
-  // ctx.font = "20px arial";
-    // ctx.fillText(function makeLetter() {
-    //     var letter = "";
-    //     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-      
-    //     for (var i = 0; i < 2; i++)
-    //       letter += possible.charAt(Math.floor(Math.random() * possible.length));
-      
-    //     return text;
-    //   });
-    //   makeLetter();
-
-
-
-
-    // var fontSize= 60;
-// // set it
-// ctx.font = fontSize+'px Poppins';
-// // the text position
-// var x = 50, y=50;
-// // the string to draw
-// var str = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-
-// ctx.strokeStyle="red";
-
-// // get every characters positions
-// var chars = [];
-// for(var i=0; i<str.length;i++) {
-//     if (str[i] === []) 
-//     	chars.push(i);
-// }
-// //iterate through the characters list
-// for(var i=0; i<chars.length; i++){
-//   // get the x position of this character
-//   var xPos = x+ctx.measureText(str.substring(0,chars[i])).width;
-//   // get the width of this character
-//   var width = ctx.measureText(str.substring(chars[i],chars[i]+1)).width;
-//   // get its height through the 1.286 approximation
-//   var height = fontSize*1.286;
-//   // get the y position
-//   var yPos = y-height/1.5
-//   // draw the rect
-//   ctx.strokeRect(xPos, yPos, width, height);
-  //}
-// draw our text
-// ctx.fillText(str, x, y);
-
 }
-
-// function drawLetter(){
-//     //ctx.clearRect(0, 0, canvas.width, canvas.height); //clears previous iterations drawn on canvas
-//     letterFall();
-// }
 
 document.addEventListener("keydown", isPressed, false); //sees if key is pressed down
 document.addEventListener("keyup", notPressed, false); // sees if key is not pressed down
 
-}; // window on load END
+}; //================ window on load END
 
 
 
-// function letters(width, height, color, x, y) {
-//     this.width = width;
-//     this.height = height;
-//     this.x = x;
-//     this.y = y;
-//     this.speedX = 0;
-//     this.speedY = 0;
-//     this.update = function(){
-//         ctx = myGameArea.context;
-//     }
-//     this.newPos = function() {
-//         this.x += this.speedX;
-//         this.y += this.speedY;
-//     }
-// }
