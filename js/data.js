@@ -1,20 +1,89 @@
 
 
-function getRandom(upperLimit) {
-  var result = Math.floor(Math.random() * upperLimit);
-  return result;
-}
+// function getRandom(upperLimit) {
+//   var result = Math.floor(Math.random() * upperLimit);
+//   return result;
+// }
 
-var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+// var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
 
 
-function pickRandomLetter() {
-  var index = getRandom(alphabet.length);
-  return alphabet[index]
-}
+// function pickRandomLetter() {
+//   var index = getRandom(alphabet.length);
+//   return alphabet[index]
+// }
 
-var oneRandomLetter = pickRandomLetter();
+// var oneRandomLetter = pickRandomLetter();
+//=======================================
+// var enemies = [];
+// var enemyWords = [];
+
+// function generate() {
+// 	//x
+// 	enemies.push(
+// 		Math.random() * (c.width - 400) + 200
+// 	);
+// 	//word
+// 	spawnedObjects.push(
+// 		alphabet[Math.floor(Math.random() * alphabet.length)]
+// 	);
+// }
+
+// function update() {
+// 	input.focus();
+// 	if(input.value.length !== value.length) 
+// 		test();
+// 	if(ig) {
+// 		if(enemies.length < 1) 
+// 			generate();
+// 		if(y < 24) 
+// 			y += 24;
+// 		if(Math.random() < generatorNumber) {
+// 			if(Math.random() < 0.0000000001) {
+// 				enemies.push(
+// 					200
+// 				);
+// 				enemyWords.push(
+// 					[window.atob(secret), "h", "s", "u", "r", "c", "t", "e", "r", "c", "e", "s"]
+// 				);
+// 			}
+// 			else 
+// 				generate();
+// 			if(generatorNumber < maxGeneratorNumber) 
+// 				generatorNumber += 0.0001;
+// 			enemySpeed += 0.002;
+// 		}
+    
+//     y += enemySpeed;
+    
+    
+//     for(var i = enemies.length - 1; i > -1; i--) {
+// 			if(i * -24 + y >= c.height - 150) {
+// 				enemies.splice(i, 1);
+// 				enemyWords.splice(i, 1);
+// 				score -= 5;
+// 				if(enemyWords[i].length < 12) 
+// 					full += enemyWords[i].length;
+// 				else 
+// 					full += enemyWords[i][0].length;
+// 				y -= 24;
+// 			}
+// 			if(enemyWords[i].length < 12) {
+// 				if(enemyWords[i].length < 1) {
+// 					enemies.splice(i, 1);
+// 					enemyWords.splice(i, 1);
+// 					y -= 24;
+// 				}
+// 			}
+// 			else {
+// 				if(enemyWords[i][0].length < 1) {
+// 					enemies.splice(i, 1);
+// 					enemyWords.splice(i, 1);
+// 					y -= 24;
+// 				}
+// 			}
+// 		}
 
 
 // ============================
@@ -254,3 +323,8 @@ var oneRandomLetter = pickRandomLetter();
 //   }
 
 // }
+
+
+
+//var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+

@@ -13,7 +13,7 @@ function startGame(){
     blockStart(); //allows user to only press start once
     setInterval(draw, 10); 
     reDraw(); // redraws letters
-       
+     
 };
 
 function reset(){ //resets game board
@@ -73,8 +73,8 @@ function notPressed(no){
 }
 
 //===============================================
-//var letterX = getRandom(canvas.width - 20) + 10; // letter positioning on x axis
-//var letterY = canvas.height - 450;// starting point of decent
+// var letterX = getRandom(canvas.width - 20) + 10; // letter positioning on x axis
+// var letterY = canvas.height - 450;// starting point of decent
 // var directionX = 0;
 // var directionY = 1;
 
@@ -85,11 +85,18 @@ function notPressed(no){
 //     letterX += directionX;
 //     letterY += directionY;
 //   };
-//================================================
+//====================================================================
+
+function getRandom(upperLimit) {
+  var result = Math.floor(Math.random() * upperLimit);
+  return result;
+}
+
+var alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 
 var spawnLineY = canvas.height - 450; // newly spawned objects start at 50 px on top of y -450
 
-var spawnRate = 1500; // spawn a new object every 1500ms
+var spawnRate = 1000; // spawn a new object every 1500ms
 
 var spawnRateOfDescent = 2; // how fast objects will fall
 
@@ -99,13 +106,16 @@ var spawnedObjects = []; // this array holds all spawned object
 
 var startTime = Date.now(); // save the starting time (used to calc elapsed time)
 
-function spawnRandomLetter() {
 
+
+function spawnRandomLetter() {
 //var letter;   // select a random type for this new object
 
 var spawnedLetter = {
 
-  letterX: getRandom(canvas.width - 20) + 10,   // set x randomly but at least 15px off the canvas edges
+  letterZ: alphabet[Math.floor(Math.random()*alphabet.length)],
+
+  letterX: getRandom(canvas.width - 50),   // set x randomly but at least 15px off the canvas edges
 
   letterY: spawnLineY, // set y to start on the line where spawnedObjects are spawned
 }
@@ -117,12 +127,6 @@ spawnedObjects.push(spawnedLetter); // add the new object to the spawnedObjects[
 function reDraw() {
 
     var time = Date.now(); // get the elapsed time
-    
-    // setTimeout(function() {
-        
-    //     var millis = Date.now() - time;
-
-    //   }, 1000);
   
     /* see if its time to spawn a new object */
     if (time > (lastSpawn + spawnRate)) {
@@ -131,19 +135,19 @@ function reDraw() {
         
     }
     requestAnimationFrame(reDraw);  // request another animation frame
-    
-    
+
     /* move each object down the canvas */
     for (var i = 0; i < spawnedObjects.length; i++) {
-        var letter = spawnedObjects[i];
-        letter.letterY += spawnRateOfDescent;
+        var newletter = spawnedObjects[i];
+        newletter.letterY += spawnRateOfDescent;
         ctx.font = '60px Poppins';
         ctx.fillStyle = '#7FFFD4';
-        ctx.fillText  (oneRandomLetter, letter.letterX, letter.letterY);
+        ctx.fillText (newletter.letterZ, newletter.letterX, newletter.letterY);
     }
-    
-   
-  }
+}
+
+//===================================================================
+
 
 function draw() {
 
@@ -159,7 +163,7 @@ function draw() {
     }else if(upGo && bookY > - 72){ // if up arrow pressed and book height adjusted and not touching edge, kepp moving
         bookY -=3; //move 3 pixels up everytime frame is drawn
     }
-
+    
 }
 
 document.addEventListener("keydown", isPressed, false); //sees if key is pressed down
