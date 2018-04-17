@@ -328,3 +328,17 @@
 
 //var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
+//===============================================
+// var letterX = getRandom(canvas.width - 20) + 10; // letter positioning on x axis
+// var letterY = canvas.height - 450;// starting point of decent
+// var directionX = 0;
+// var directionY = 1;
+
+// function letterFall(){
+//     ctx.font = '60px Poppins';
+//     ctx.fillStyle = '#7FFFD4';
+//     ctx.fillText  (oneRandomLetter, letterX, letterY);//fill the text with a random letter 
+//     letterX += directionX;
+//     letterY += directionY;
+//   };
+//====================================================================

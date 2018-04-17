@@ -1,6 +1,6 @@
 
-var canvas = document.getElementById("gameCanvas"); 
-var ctx = canvas.getContext("2d");
+var canvas = document.getElementById("gameCanvas"); //canvas element
+var ctx = canvas.getContext("2d"); //what type of canvas it is 
 
 
 window.onload = function() {
@@ -11,7 +11,7 @@ window.onload = function() {
 
 function startGame(){ 
     blockStart(); //allows user to only press start once
-    setInterval(draw, 10); 
+    setInterval(draw, 10); // call the draw function every 10 milliseconds
     reDraw(); // redraws letters
      
 };
@@ -37,7 +37,7 @@ var bookWidth = 200;
 var bookX = (canvas.width-bookWidth) / 1.73; //centering the book image on canvas
 var bookY = (canvas.height-bookHeight) / 0.8;
 
-/* not moving is default */
+/* book not moving is default */
 var rightGo = false; 
 var leftGo = false;
 var upGo = false;
@@ -72,21 +72,7 @@ function notPressed(no){
     }
 }
 
-//===============================================
-// var letterX = getRandom(canvas.width - 20) + 10; // letter positioning on x axis
-// var letterY = canvas.height - 450;// starting point of decent
-// var directionX = 0;
-// var directionY = 1;
-
-// function letterFall(){
-//     ctx.font = '60px Poppins';
-//     ctx.fillStyle = '#7FFFD4';
-//     ctx.fillText  (oneRandomLetter, letterX, letterY);//fill the text with a random letter 
-//     letterX += directionX;
-//     letterY += directionY;
-//   };
-//====================================================================
-
+/* get random number */
 function getRandom(upperLimit) {
   var result = Math.floor(Math.random() * upperLimit);
   return result;
@@ -96,35 +82,32 @@ var alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
 
 var spawnLineY = canvas.height - 450; // newly spawned objects start at 50 px on top of y -450
 
-var spawnRate = 1000; // spawn a new object every 1500ms
+var spawnRate = 1000; // spawn a new letter every 1000ms
 
-var spawnRateOfDescent = 2; // how fast objects will fall
+var spawnRateOfDescent = 2; // how fast letters will fall
 
-var lastSpawn = -1; // when was the last object spawned
+var lastSpawn = -1; // when was the last letter spawned
 
-var spawnedObjects = []; // this array holds all spawned object
+var spawnedLetters = []; // this array holds all spawned letters
 
 var startTime = Date.now(); // save the starting time (used to calc elapsed time)
 
 
 
-function spawnRandomLetter() {
-//var letter;   // select a random type for this new object
+function spawnRandomLetter() { // object letter function
 
-var spawnedLetter = {
+var letterObject = { //new letter object
 
-  letterZ: alphabet[Math.floor(Math.random()*alphabet.length)],
+  letterZ: alphabet[Math.floor(Math.random()*alphabet.length)], //loop through and get random letter from alphabet
 
   letterX: getRandom(canvas.width - 50),   // set x randomly but at least 15px off the canvas edges
 
-  letterY: spawnLineY, // set y to start on the line where spawnedObjects are spawned
+  letterY: spawnLineY, // set y to start on the line where spawnedLetters are spawned
 }
+spawnedLetters.push(letterObject); // add the new letter to the spawnedObjects[] array
+};
 
-spawnedObjects.push(spawnedLetter); // add the new object to the spawnedObjects[] array
-
-}
-
-function reDraw() {
+function reDraw() { // redraw random letter function
 
     var time = Date.now(); // get the elapsed time
   
@@ -137,14 +120,14 @@ function reDraw() {
     requestAnimationFrame(reDraw);  // request another animation frame
 
     /* move each object down the canvas */
-    for (var i = 0; i < spawnedObjects.length; i++) {
-        var newletter = spawnedObjects[i];
+    for (var i = 0; i < spawnedLetters.length; i++) {
+        var newletter = spawnedLetters[i];
         newletter.letterY += spawnRateOfDescent;
-        ctx.font = '60px Poppins';
-        ctx.fillStyle = '#7FFFD4';
-        ctx.fillText (newletter.letterZ, newletter.letterX, newletter.letterY);
+        ctx.font = '60px Poppins'; // letter font-size and font
+        ctx.fillStyle = '#7FFFD4'; // letter color
+        ctx.fillText (newletter.letterZ, newletter.letterX, newletter.letterY); // random letter, letter x position, where on y it spawns
     }
-}
+};
 
 //===================================================================
 
