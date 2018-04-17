@@ -29,13 +29,13 @@ function blockStart(){ //prevents player from hiiting start after game initializ
 
 /* image of book */
 var bookImg = new Image();  // book image
-bookImg.src = "/images/openBookIllustrator.svg"
+bookImg.src = "/images/bookVec2.svg"
 
 /* defines book */
-var bookHeight = 180;
-var bookWidth = 200;
-var bookX = (canvas.width-bookWidth) / 1.73; //centering the book image on canvas
-var bookY = (canvas.height-bookHeight) / 0.8;
+var bookHeight = 70;//original 180
+var bookWidth = 110;//original 200
+var bookX = (canvas.width-bookWidth) / 2; //centering the book image on canvas //original 1.73
+var bookY = (canvas.height-bookHeight);//original /0.8
 
 /* book not moving is default */
 var rightGo = false; 
@@ -137,13 +137,13 @@ function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height); //clears previous iterations drawn on canvas
     ctx.drawImage(bookImg, bookX, bookY, bookWidth, bookHeight); //drawing the book onto the canvas
 
-    if(rightGo && bookX < canvas.width - bookWidth + 82){ // if right arrow pressed and book width adjust not touching edge, keep moving
+    if(rightGo && bookX < canvas.width - bookWidth + 5){ // if right arrow pressed and book width adjust not touching edge, keep moving //original +82
         bookX +=5; // move 5 pixels to right everytime frame is drawn
-    }else if(leftGo && bookX > - 24){ // if left arrow pressed and book width adjusted and not touching edge, kepp moving
+    }else if(leftGo && bookX > - 5){ // if left arrow pressed and book width adjusted and not touching edge, kepp moving //original -24
         bookX -=5; //move 5 pixels to the left everytime frame is drawn
-    }else if(downGo && bookY < canvas.height - 100){ // if down arrow pressed and book height adjust not touching edge, keep moving
+    }else if(downGo && bookY < canvas.height - 60){ // if down arrow pressed and book height adjust not touching edge, keep moving //original -100
         bookY +=3; // move 3 pixels down everytime frame is drawn
-    }else if(upGo && bookY > - 72){ // if up arrow pressed and book height adjusted and not touching edge, kepp moving
+    }else if(upGo && bookY > - 10){ // if up arrow pressed and book height adjusted and not touching edge, kepp moving //original -72
         bookY -=3; //move 3 pixels up everytime frame is drawn
     }
     
