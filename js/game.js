@@ -13,7 +13,8 @@ function startGame(){
     blockStart(); //allows user to only press start once
     setInterval(draw, 10); // call the draw function every 10 milliseconds
     reDraw(); // redraws letters
-     
+   
+
 };
 
 function reset(){ //resets game board
@@ -32,9 +33,10 @@ var bookImg = new Image();  // book image
 bookImg.src = "/images/bookVec2.svg"
 
 /* defines book */
+var book = ctx.drawImage(bookImg, bookX, bookY, bookWidth, bookHeight); //the book image
 var bookHeight = 70;//original 180
 var bookWidth = 110;//original 200
-var bookX = (canvas.width-bookWidth) / 2; //centering the book image on canvas //original 1.73
+var bookX = (canvas.width-bookWidth)/2; //centering the book image on canvas //original 1.73
 var bookY = (canvas.height-bookHeight);//original /0.8
 
 /* book not moving is default */
@@ -99,18 +101,18 @@ function spawnRandomLetter() { // object letter function
 var letterObject = { //new letter object
 
   letterZ: alphabet[Math.floor(Math.random()*alphabet.length)], //loop through and get random letter from alphabet
-
-  letterX: getRandom(canvas.width - 50),   // set x randomly but at least 15px off the canvas edges
-
+  
+  letterX: getRandom(canvas.width),   // set x randomly but at least  off the canvas edges
+  
   letterY: spawnLineY, // set y to start on the line where spawnedLetters are spawned
 }
 spawnedLetters.push(letterObject); // add the new letter to the spawnedObjects[] array
 };
 
 function reDraw() { // redraw random letter function
-
+    
     var time = Date.now(); // get the elapsed time
-  
+    
     /* see if its time to spawn a new object */
     if (time > (lastSpawn + spawnRate)) {
         lastSpawn = time;
@@ -118,16 +120,42 @@ function reDraw() { // redraw random letter function
         
     }
     requestAnimationFrame(reDraw);  // request another animation frame
-
-    /* move each object down the canvas */
+    
+    /* spawn and move each object down the canvas */
     for (var i = 0; i < spawnedLetters.length; i++) {
-        var newletter = spawnedLetters[i];
+        var newletter = spawnedLetters[i];  
+        //debugger;   
         newletter.letterY += spawnRateOfDescent;
         ctx.font = '60px Poppins'; // letter font-size and font
         ctx.fillStyle = '#7FFFD4'; // letter color
         ctx.fillText (newletter.letterZ, newletter.letterX, newletter.letterY); // random letter, letter x position, where on y it spawns
+        
+        /* collision detection */ 
+        
+       
+        if((newletter.letterY   >= bookY  && newletter.letterY <= bookY + bookHeight)
+        &&(newletter.letterX  >= bookX  && newletter.letterX <= bookX + bookWidth)){
+          console.log("hit");
+          spawnedLetters.splice(i,1);
+          }
+       
     }
-};
+    
+    
+    
+    // if((newletter.letterZ.y >= bookX && newletter.letterZ.x <= bookX + bookWidth)
+    // &&(newletter.letterZ.y + newletter.letterZ.height <= bookY && newletter.letterZ.y >= bookY + bookHeight)){
+    //   console.log("nom");
+    // }
+    // if((obstacle.y + (obstacle.height - 50) >= currentGame.tom.y && obstacle.y <= currentGame.tom.y + currentGame.tom.height)
+    // &&(obstacle.x + obstacle.width>= currentGame.tom.x &&obstacle.x <= currentGame.tom.x+currentGame.tom.width)){
+    //   console.log("nom");
+
+
+}; //======= redraw END
+
+
+
 
 //===================================================================
 
@@ -146,13 +174,13 @@ function draw() {
     }else if(upGo && bookY > - 10){ // if up arrow pressed and book height adjusted and not touching edge, kepp moving //original -72
         bookY -=3; //move 3 pixels up everytime frame is drawn
     }
+
     
 }
+
 
 document.addEventListener("keydown", isPressed, false); //sees if key is pressed down
 document.addEventListener("keyup", notPressed, false); // sees if key is not pressed down
 
-}; //================ window on load END
-
-
+};//================ window on load END
 
