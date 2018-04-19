@@ -63,7 +63,7 @@ body {
 
 }
 .flex-3 h2 {
-    margin-right: 90px;
+    margin-right: 70px;
 }
 
 .flex-3 p {
@@ -81,6 +81,8 @@ body {
 }
 .score {
     display: flex;
+    justify-content: space-around;
+    width: 200px;
 }
 
 .title-bg {
@@ -96,22 +98,42 @@ body {
 
 h1 {
     text-shadow: 1px 3px 7px RGB(127, 255, 212);
-    margin-left: 40px;
-
 }
 
 h2 {
 font-size: 30px;
-margin-left: 20px;
 }
 
 canvas {
     background: #222222;
     margin-bottom: 70px;
-    margin-top: 80px;
+    margin-top: 80px; 
     border: 5px solid darkgrey;
 }
 
+.answer-div {
+    height:80px;
+    margin-bottom: 30px;
+    width: 200px;
+}
+.wrong-div {
+    height:80px;
+    margin-bottom: 30px;
+    width: 200px;
+}
+
+.correct-answer {
+    color: #7FFFD4;
+    font-size: 60pt;
+    margin-top: 50px;
+    text-shadow: -1px 0 black, 0 3px black, 3px 0 black, 0 -1px black;
+}
+.wrong-answer {
+    color: red;
+    font-size: 60pt;
+    margin-top: 50px;
+    text-shadow: -1px 0 black, 0 3px black, 3px 0 black, 0 -1px black;
+}
 .btn {
     margin-bottom: 70px;
     box-shadow: 1px 1px 5px 3px RGB(60, 179, 113);

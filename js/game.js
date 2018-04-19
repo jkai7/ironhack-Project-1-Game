@@ -82,13 +82,18 @@ function getRandom(upperLimit) {
 
 var alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 
-var word = "DOG"; //answer to word hint
+var word = "DOG";
+// var Answer = [{word:"DOG", clue:"MAN'S BEST FRIEND"},
+//               {word:"CAT", clue:"HATES ALL HUMANS, HAS 9 LIVES"},
+//               {word:"MOUSE", clue:"FIRST NAME MICKEY"}];//answer to word hint
 
 var totalPoints = 0;
 
+var wrongLet = 0;
+
 var spawnLineY = canvas.height - 450; // newly spawned objects start at 50 px on top of y -450
 
-var spawnRate = 1000; // spawn a new letter every 1000ms
+var spawnRate = 500; // spawn a new letter every 1000ms
 
 var spawnRateOfDescent = 2; // how fast letters will fall
 
@@ -99,7 +104,7 @@ var spawnedLetters = []; // this array holds all spawned letters
 var startTime = Date.now(); // save the starting time (used to calc elapsed time)
 
 
-
+/* spawning random letter */
 function spawnRandomLetter() { // object letter function
 
 var letterObject = { //new letter object
@@ -113,6 +118,7 @@ var letterObject = { //new letter object
 spawnedLetters.push(letterObject); // add the new letter to the spawnedObjects[] array
 };
 
+/* redraw random letters */
 function reDraw() { // redraw random letter function
     
     var time = Date.now(); // get the elapsed time
@@ -136,38 +142,40 @@ function reDraw() { // redraw random letter function
         
         /* collision detection */ 
        function collision(){
-           var exes = 0;
+           
+           
         if((newletter.letterY   >= (bookY+20)  && newletter.letterY <= bookY+ (bookHeight))
         &&(newletter.letterX  >= (bookX-20)  && newletter.letterX <= bookX + bookWidth)){
           //console.log("hit");
           //console.log(newletter)
           
-          if(word.includes(newletter.letterZ) > 0){//if letter is included in word array
+          if(word.includes(newletter.letterZ) > 0){//if letter is included in word array //====FINDS CORRECT LETTER
             index = word.indexOf(newletter.letterZ)//gets index of word array
                 //console.log(index);
             word = word.split(word[index])//splits letter at index of word array
                 //console.log(word);
             word = word.join("");//is the new word array with the previous letter split off
             console.log(newletter.letterZ);//shows letter that split
-            //document.getElementById('letters-div').appendChild(newletter.letterZ)
-           // console.log(word)       
+           // console.log(word)   
+           document.getElementById("correct-answer").append(newletter.letterZ);    
             
            if (word.length === 0){//if there are no more letters in word array
                  totalPoints++
                 document.getElementById("points").innerHTML = totalPoints;//changes score
-                console.log("you win!")
-
+                alert("ANSWER IS: DOG! YOU WIN!!!");
+                location.reload();
             }
         }else{
-
+            
+            document.getElementById("wrong-answer").append("X")
+          
+            wrongLet++
             console.log("X");
-//exes++;
-            //document.getElementById('exes-div').appendChild("x")
-
-            if (exes >= 3){//if there are no more letters in word array
-                // append somehting
-                console.log("you lose")
+            if ( wrongLet >= 3){//if there are no more letters in word array
+               alert("YOU LOSE!!! TRY AGAIN");
+               location.reload();
             }
+            
         }
           spawnedLetters.splice(i,1);//deletes the wrong letters if there is a collision
         }
