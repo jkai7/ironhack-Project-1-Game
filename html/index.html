@@ -15,25 +15,35 @@
             
             <div class="title-bg">
                 <div class="flex-2">
-                        <h2>SCORE: 0</h2>
+                        <h2 id="score">SCORE: 0</h2>
                     <h1 class="gameTitle">BOOGIEBOOK</h1>
                             <div class="flex-3">
                         <h2>WORD HINT:</h2>
-                        <p>"MAN'S BEST FRIEND"</p>
+                        <p id="hint-phrase">"MAN'S BEST FRIEND"</p>
                             </div>
                 </div> <!--flex 2-->
             </div> <!--title bg-->
-           
+            
+            <div class="canvas-container">
+            <div class="flex-canvas">
+            <div>
+                <canvas id="lives" width ="200" height="90"></canvas>
+            </div>
             <div>
                 <canvas id="gameCanvas" width="600" height="400"></canvas>
             </div> 
-            
+            <div>
+                <canvas id="answer" width="200" height="90"></canvas>
+            </div>
+            </div><!-- flex canvas -->
+            </div>
+
             <div>
                 <button id="start-btn" type="button" class="btn btn-light btn-lg">START</button>
             </div>
 
                 <button type="button" id="reset" class="reset">RESTART</button>
-                
+        
                 
                 
         </div> <!--flex container-->

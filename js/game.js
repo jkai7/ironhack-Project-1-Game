@@ -9,7 +9,7 @@ window.onload = function() {
     startGame();
 }
 
-function startGame(){ 
+function startGame(){  // start game 
     blockStart(); //allows user to only press start once
     setInterval(draw, 10); // call the draw function every 10 milliseconds
     reDraw(); // redraws letters
@@ -102,7 +102,7 @@ var letterObject = { //new letter object
 
   letterZ: alphabet[Math.floor(Math.random()*alphabet.length)], //loop through and get random letter from alphabet
   
-  letterX: getRandom(canvas.width),   // set x randomly but at least  off the canvas edges
+  letterX: getRandom(canvas.width - 50),   // set x randomly 
   
   letterY: spawnLineY, // set y to start on the line where spawnedLetters are spawned
 }
@@ -125,32 +125,29 @@ function reDraw() { // redraw random letter function
     for (var i = 0; i < spawnedLetters.length; i++) {
         var newletter = spawnedLetters[i];  
         //debugger;   
-        newletter.letterY += spawnRateOfDescent;
+        newletter.letterY += spawnRateOfDescent; //new letter and 
         ctx.font = '60px Poppins'; // letter font-size and font
         ctx.fillStyle = '#7FFFD4'; // letter color
         ctx.fillText (newletter.letterZ, newletter.letterX, newletter.letterY); // random letter, letter x position, where on y it spawns
         
         /* collision detection */ 
         
-       
-        if((newletter.letterY   >= bookY  && newletter.letterY <= bookY + bookHeight)
-        &&(newletter.letterX  >= bookX  && newletter.letterX <= bookX + bookWidth)){
+       function collision(){
+        if((newletter.letterY   >= (bookY+20)  && newletter.letterY <= bookY+ (bookHeight))
+        &&(newletter.letterX  >= (bookX-20)  && newletter.letterX <= bookX + bookWidth)){
           console.log("hit");
-          spawnedLetters.splice(i,1);
-          }
-       
+          spawnedLetters.splice(i,1);//deletes the wrong letters if there is a collision
+        }
+        }
+        
+        collision();
+        
+        // function dog(){
+        // if(spawned letter (i) === "d"||spawned letter(i) === "o"||spawned letter (i)==="g"){
+            //spawnedLetters.push(dogarray)
+        // } 
+        // }//===if you catch the right letters, they will be pushed into an array
     }
-    
-    
-    
-    // if((newletter.letterZ.y >= bookX && newletter.letterZ.x <= bookX + bookWidth)
-    // &&(newletter.letterZ.y + newletter.letterZ.height <= bookY && newletter.letterZ.y >= bookY + bookHeight)){
-    //   console.log("nom");
-    // }
-    // if((obstacle.y + (obstacle.height - 50) >= currentGame.tom.y && obstacle.y <= currentGame.tom.y + currentGame.tom.height)
-    // &&(obstacle.x + obstacle.width>= currentGame.tom.x &&obstacle.x <= currentGame.tom.x+currentGame.tom.width)){
-    //   console.log("nom");
-
 
 }; //======= redraw END
 
