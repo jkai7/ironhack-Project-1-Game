@@ -82,6 +82,10 @@ function getRandom(upperLimit) {
 
 var alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 
+var word = "DOG"; //answer to word hint
+
+var totalPoints = 0;
+
 var spawnLineY = canvas.height - 450; // newly spawned objects start at 50 px on top of y -450
 
 var spawnRate = 1000; // spawn a new letter every 1000ms
@@ -131,22 +135,50 @@ function reDraw() { // redraw random letter function
         ctx.fillText (newletter.letterZ, newletter.letterX, newletter.letterY); // random letter, letter x position, where on y it spawns
         
         /* collision detection */ 
-        
        function collision(){
+           var exes = 0;
         if((newletter.letterY   >= (bookY+20)  && newletter.letterY <= bookY+ (bookHeight))
         &&(newletter.letterX  >= (bookX-20)  && newletter.letterX <= bookX + bookWidth)){
-          console.log("hit");
+          //console.log("hit");
+          //console.log(newletter)
+          
+          if(word.includes(newletter.letterZ) > 0){//if letter is included in word array
+            index = word.indexOf(newletter.letterZ)//gets index of word array
+                //console.log(index);
+            word = word.split(word[index])//splits letter at index of word array
+                //console.log(word);
+            word = word.join("");//is the new word array with the previous letter split off
+            console.log(newletter.letterZ);//shows letter that split
+            //document.getElementById('letters-div').appendChild(newletter.letterZ)
+           // console.log(word)       
+            
+           if (word.length === 0){//if there are no more letters in word array
+                 totalPoints++
+                document.getElementById("points").innerHTML = totalPoints;//changes score
+                console.log("you win!")
+
+            }
+        }else{
+
+            console.log("X");
+//exes++;
+            //document.getElementById('exes-div').appendChild("x")
+
+            if (exes >= 3){//if there are no more letters in word array
+                // append somehting
+                console.log("you lose")
+            }
+        }
           spawnedLetters.splice(i,1);//deletes the wrong letters if there is a collision
         }
+
+       
         }
+        
+
         
         collision();
         
-        // function dog(){
-        // if(spawned letter (i) === "d"||spawned letter(i) === "o"||spawned letter (i)==="g"){
-            //spawnedLetters.push(dogarray)
-        // } 
-        // }//===if you catch the right letters, they will be pushed into an array
     }
 
 }; //======= redraw END

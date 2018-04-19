@@ -79,6 +79,9 @@ body {
     display: flex;
     justify-content: space-around;
 }
+.score {
+    display: flex;
+}
 
 .title-bg {
     height: 120px;
