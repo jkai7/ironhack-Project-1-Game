@@ -169,8 +169,13 @@ function reDraw() { // redraw random letter function
                  totalPoints++
                 document.getElementById("points").innerHTML = totalPoints;//changes score
                 //alert("THE ANSWER IS: DOG! YOU WIN!!!");
+                document.getElementById("correct-answer").innerHTML = "DOG";
+
                 document.getElementById("hidden").style.visibility = "visible";
-                setTimeout(window.location.reload.bind(window.location), 3000);
+                document.getElementById("wrong-answer").style.visibility = "hidden";
+                
+                setTimeout(window.location.reload.bind(window.location), 3500);
+                
 
             }
         }else{
@@ -182,8 +187,11 @@ function reDraw() { // redraw random letter function
             if ( wrongLet >= 3){//if there are no more letters in word array
                //alert("YOU LOSE!!! TRY AGAIN");
                document.getElementById("hidden2").style.visibility = "visible";
+               document.getElementById("wrong-answer").style.visibility = "hidden";
+               document.getElementById("correct-answer").style.visibility = "hidden";
+
                 //location.reload();
-                setTimeout(window.location.reload.bind(window.location), 3000);
+                setTimeout(window.location.reload.bind(window.location), 3500);
                
             }
             
