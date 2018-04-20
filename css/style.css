@@ -95,6 +95,29 @@ body {
     border-bottom: 5px solid darkgray;
 }
 
+.win {
+    color: #7FFFD4;
+    font-size: 100px;
+    position: absolute;
+    margin-top: 85px;
+    background: linear-gradient(#000000, #222222);
+    width: 600px;
+    height: 400px;
+    padding-top: 90px;
+    padding-left: 40px;
+} 
+.lose {
+    color: red;
+    font-size: 100px;
+    position: absolute;
+    margin-top: 85px;
+    background: linear-gradient(#000000, #222222);
+    width: 600px;
+    height: 400px;
+    padding-top: 90px;
+    padding-left: 30px;
+}
+
 h1 {
     text-shadow: 1px 3px 7px RGB(127, 255, 212);
 }

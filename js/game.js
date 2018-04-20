@@ -87,6 +87,8 @@ var word = "DOG";
 //               {word:"CAT", clue:"HATES ALL HUMANS, HAS 9 LIVES"},
 //               {word:"MOUSE", clue:"FIRST NAME MICKEY"}];//answer to word hint
 
+var ticker = true;
+   
 var totalPoints = 0;
 
 var wrongLet = 0;
@@ -102,6 +104,10 @@ var lastSpawn = -1; // when was the last letter spawned
 var spawnedLetters = []; // this array holds all spawned letters
 
 var startTime = Date.now(); // save the starting time (used to calc elapsed time)
+
+document.getElementById("hidden").style.visibility = "hidden";
+document.getElementById("hidden2").style.visibility = "hidden";
+document.getElementById("hidden3").style.visibility = "hidden";
 
 
 /* spawning random letter */
@@ -162,8 +168,10 @@ function reDraw() { // redraw random letter function
            if (word.length === 0){//if there are no more letters in word array
                  totalPoints++
                 document.getElementById("points").innerHTML = totalPoints;//changes score
-                alert("THE ANSWER IS: DOG! YOU WIN!!!");
-                location.reload();
+                //alert("THE ANSWER IS: DOG! YOU WIN!!!");
+                document.getElementById("hidden").style.visibility = "visible";
+                setTimeout(window.location.reload.bind(window.location), 3000);
+
             }
         }else{
             
@@ -172,8 +180,11 @@ function reDraw() { // redraw random letter function
             wrongLet++
             console.log("X");
             if ( wrongLet >= 3){//if there are no more letters in word array
-               alert("YOU LOSE!!! TRY AGAIN");
-               location.reload();
+               //alert("YOU LOSE!!! TRY AGAIN");
+               document.getElementById("hidden2").style.visibility = "visible";
+                //location.reload();
+                setTimeout(window.location.reload.bind(window.location), 3000);
+               
             }
             
         }
@@ -211,7 +222,11 @@ function draw() {
     }else if(upGo && bookY > - 10){ // if up arrow pressed and book height adjusted and not touching edge, kepp moving //original -72
         bookY -=3; //move 3 pixels up everytime frame is drawn
     }
-
+    
+    // var countdown = function() {
+    //   if (board.timer > 0 ) { // so it doesn't go to -1
+    //      board.timer--;
+    //   } 
     
 }
 
