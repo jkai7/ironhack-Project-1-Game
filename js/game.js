@@ -80,7 +80,7 @@ function getRandom(upperLimit) {
   return result;
 }
 
-var alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+var alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "D", "J", "K", "O", "M", "N", "O", "P", "G", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 
 var word = "DOG";
 // var Answer = [{word:"DOG", clue:"MAN'S BEST FRIEND"},
@@ -144,8 +144,8 @@ function reDraw() { // redraw random letter function
        function collision(){
            
            
-        if((newletter.letterY   >= (bookY+20)  && newletter.letterY <= bookY+ (bookHeight))
-        &&(newletter.letterX  >= (bookX-20)  && newletter.letterX <= bookX + bookWidth)){
+        if((newletter.letterY   >= (bookY+20)  && newletter.letterY <= bookY+ (bookHeight-20))
+        &&(newletter.letterX  >= (bookX-20)  && newletter.letterX <= bookX + (bookWidth-20))){
           //console.log("hit");
           //console.log(newletter)
           
@@ -162,7 +162,7 @@ function reDraw() { // redraw random letter function
            if (word.length === 0){//if there are no more letters in word array
                  totalPoints++
                 document.getElementById("points").innerHTML = totalPoints;//changes score
-                alert("ANSWER IS: DOG! YOU WIN!!!");
+                alert("THE ANSWER IS: DOG! YOU WIN!!!");
                 location.reload();
             }
         }else{

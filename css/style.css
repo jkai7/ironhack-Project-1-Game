@@ -88,8 +88,7 @@ body {
 .title-bg {
     height: 120px;
     width: 1440px;
-    background: #222222;
-    /* box-shadow: 1px 1px 30px 1px RGBA(127, 255, 212, .5); */
+    background: linear-gradient(#000000, #222222);    /* box-shadow: 1px 1px 30px 1px RGBA(127, 255, 212, .5); */
     color: #fff;
     font-size: 40px;
     border-radius: .3rem;
@@ -105,7 +104,7 @@ font-size: 30px;
 }
 
 canvas {
-    background: #222222;
+    background: linear-gradient(#000000, #222222);
     margin-bottom: 70px;
     margin-top: 80px; 
     border: 5px solid darkgrey;
